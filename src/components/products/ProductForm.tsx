@@ -46,8 +46,8 @@ const formSchema = z.object({
   description: z.string().optional(),
   price: z.coerce.number().min(0, 'Price must be a positive number.'),
   stock: z.coerce.number().int().min(0, 'Stock must be a positive integer.'),
-  category_id: z.string().uuid('Please select a category.'),
-  brand_id: z.string().uuid('Please select a brand.'),
+  category_id: z.string().uuid().optional().or(z.literal('')),
+  brand_id: z.string().uuid().optional().or(z.literal('')),
   image_url: z.string().url('Please enter a valid URL.').optional().or(z.literal('')),
 });
 
