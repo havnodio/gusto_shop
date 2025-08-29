@@ -12,6 +12,9 @@ import Account from "./pages/Account";
 import AdminDashboard from "./pages/admin/Index";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import ProductsPage from "./pages/Products";
+import { CartProvider } from "./contexts/CartContext";
+import CartPage from "./pages/Cart";
+import AdminOrdersPage from "./pages/admin/Orders";
 
 const queryClient = new QueryClient();
 
@@ -22,31 +25,42 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AuthProvider>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route 
-                path="/account" 
-                element={
-                  <ProtectedRoute>
-                    <Account />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/admin" 
-                element={
-                  <ProtectedRoute role="admin">
-                    <AdminDashboard />
-                  </ProtectedRoute>
-                } 
-              />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
+          <CartProvider>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/products" element={<ProductsPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route 
+                  path="/account" 
+                  element={
+                    <ProtectedRoute>
+                      <Account />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/admin" 
+                  element={
+                    <ProtectedRoute role="admin">
+                      <AdminDashboard />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route 
+                  path="/admin/orders" 
+                  element={
+                    <ProtectedRoute role="admin">
+                      <AdminOrdersPage />
+                    </ProtectedRoute>
+                  } 
+                />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+          </CartProvider>
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>

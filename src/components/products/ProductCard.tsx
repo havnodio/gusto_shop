@@ -2,7 +2,8 @@ import React from 'react';
 import { Product } from '@/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Pencil, Trash2 } from 'lucide-react';
+import { Pencil, Trash2, ShoppingCart } from 'lucide-react';
+import { useCart } from '@/contexts/CartContext';
 
 interface ProductCardProps {
   product: Product;
@@ -12,6 +13,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, isAdmin, onEdit, onDelete }) => {
+  const { addToCart } = useCart();
   const placeholderImage = '/placeholder.svg';
 
   return (
@@ -31,7 +33,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, isAdmin, onEdit, onD
         </p>
       </CardContent>
       <CardFooter className="p-4 flex justify-between items-center">
-        <Button>View Details</Button>
+        <Button onClick={() => addToCart(product)}>
+          <ShoppingCart className="mr-2 h-4 w-4" />
+          Add to Cart
+        </Button>
         {isAdmin && (
           <div className="flex space-x-2">
             <Button variant="outline" size="icon" onClick={onEdit}>

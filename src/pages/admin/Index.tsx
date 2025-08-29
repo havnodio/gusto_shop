@@ -1,10 +1,21 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { ListOrdered } from 'lucide-react';
 
 const AdminDashboard = () => {
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+        <Button asChild>
+          <Link to="/admin/orders">
+            <ListOrdered className="mr-2 h-4 w-4" />
+            View Orders
+          </Link>
+        </Button>
+      </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader>
