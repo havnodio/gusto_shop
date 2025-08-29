@@ -1,62 +1,64 @@
-import React from "react";
-// The MadeWithDyad component is removed from here as the layout now provides the overall structure.
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, Package, ShoppingBag, User } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+
+const DashboardCard = ({ title, description, icon: Icon, link, linkText }: { title: string, description: string, icon: React.ElementType, link: string, linkText: string }) => (
+  <Card>
+    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      <CardTitle className="text-sm font-medium">{title}</CardTitle>
+      <Icon className="h-4 w-4 text-muted-foreground" />
+    </CardHeader>
+    <CardContent>
+      <p className="text-xs text-muted-foreground mb-4">{description}</p>
+      <Button asChild variant="outline" size="sm">
+        <Link to={link}>
+          {linkText}
+          <ArrowRight className="ml-2 h-4 w-4" />
+        </Link>
+      </Button>
+    </CardContent>
+  </Card>
+);
 
 const Index = () => {
+  const { profile } = useAuth();
+
   return (
-    <div className="flex flex-col items-center justify-center py-12">
-      <h1 className="text-5xl font-extrabold text-gray-900 dark:text-gray-100 mb-6">
-        Welcome to My E-Shop!
-      </h1>
-      <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl text-center">
-        Discover amazing products and enjoy a seamless shopping experience.
-      </p>
-      <div className="space-x-4">
-        <a href="/products" className="px-6 py-3 bg-primary text-primary-foreground rounded-lg shadow-md hover:bg-primary/90 transition-colors text-lg font-medium">
-          Shop Now
-        </a>
-        <a href="/about" className="px-6 py-3 border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 rounded-lg shadow-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-lg font-medium">
-          Learn More
-        </a>
+    <div className="flex flex-col">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold tracking-tight">
+          Welcome back, {profile?.first_name || 'Guest'}!
+        </h1>
+        <p className="text-muted-foreground">
+          Here's a quick overview of your shop.
+        </p>
       </div>
-      {/* Placeholder for featured products or categories */}
-      <section className="mt-16 w-full max-w-4xl">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
-          Featured Products
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Example Product Card Placeholder */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center">
-            <div className="w-32 h-32 bg-gray-200 dark:bg-gray-700 mx-auto mb-4 rounded-md flex items-center justify-center text-gray-500 dark:text-gray-400">
-              Image
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Product Name</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">$99.99</p>
-            <a href="/products/1" className="px-4 py-2 bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors">
-              View Details
-            </a>
-          </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center">
-            <div className="w-32 h-32 bg-gray-200 dark:bg-gray-700 mx-auto mb-4 rounded-md flex items-center justify-center text-gray-500 dark:text-gray-400">
-              Image
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Product Name</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">$99.99</p>
-            <a href="/products/2" className="px-4 py-2 bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors">
-              View Details
-            </a>
-          </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center">
-            <div className="w-32 h-32 bg-gray-200 dark:bg-gray-700 mx-auto mb-4 rounded-md flex items-center justify-center text-gray-500 dark:text-gray-400">
-              Image
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Product Name</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">$99.99</p>
-            <a href="/products/3" className="px-4 py-2 bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors">
-              View Details
-            </a>
-          </div>
-        </div>
-      </section>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <DashboardCard
+          title="Browse Products"
+          description="Explore our collection of amazing products."
+          icon={Package}
+          link="/products"
+          linkText="Shop Now"
+        />
+        <DashboardCard
+          title="Order History"
+          description="View your past orders and track their status."
+          icon={ShoppingBag}
+          link="/account" // The account page has an order history tab
+          linkText="View Orders"
+        />
+        <DashboardCard
+          title="Manage Account"
+          description="Update your personal information and settings."
+          icon={User}
+          link="/account"
+          linkText="Go to Account"
+        />
+      </div>
     </div>
   );
 };
