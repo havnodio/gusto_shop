@@ -64,7 +64,10 @@ const ProductsPage = () => {
     mutationFn: async (productData: Partial<Product> & { id?: string }) => {
       const { id, ...updateData } = productData;
       if (id) {
-        const { error } = await supabase.from('products').update(updateData).eq('id', id);
+        const { error } = await supabase
+          .from('products')
+          .update({ ...updateData, updated_at: new Date().toISOString() })
+          .eq('id', id);
         if (error) throw new Error(error.message);
       } else {
         const { error } = await supabase.from('products').insert(updateData);
