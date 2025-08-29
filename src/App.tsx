@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Account from "./pages/Account";
 import AdminDashboard from "./pages/admin/Index";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ProductsPage from "./pages/Products";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/products" element={<ProductsPage />} />
               <Route 
                 path="/account" 
                 element={
