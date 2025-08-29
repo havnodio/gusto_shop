@@ -13,7 +13,7 @@ const Sidebar = () => {
   const location = useLocation();
 
   const navItems = [
-    { href: '/', label: 'Dashboard', icon: Home },
+    { href: '/dashboard', label: 'Dashboard', icon: Home },
     { href: '/products', label: 'Products', icon: Package },
     { href: '/cart', label: 'Cart', icon: ShoppingCart, badge: cartCount > 0 ? cartCount : undefined },
     { href: '/account', label: 'Account', icon: User, auth: true },

@@ -23,7 +23,7 @@ const DashboardCard = ({ title, description, icon: Icon, link, linkText }: { tit
   </Card>
 );
 
-const Index = () => {
+const Dashboard = () => {
   const { profile } = useAuth();
 
   return (
@@ -63,4 +63,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Dashboard;
