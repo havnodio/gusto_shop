@@ -11,7 +11,7 @@ const Navbar = () => {
     <nav className="bg-primary text-primary-foreground p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold">
-          My E-Shop
+          Gusto Club
         </Link>
         <div className="flex items-center space-x-4">
           <Link to="/products">
