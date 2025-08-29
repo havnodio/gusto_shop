@@ -7,6 +7,7 @@ export default defineConfig(() => ({
   server: {
     host: "::",
     port: 8080,
+    vitePort: 32100 
   },
   plugins: [dyadComponentTagger(), react()],
   resolve: {
